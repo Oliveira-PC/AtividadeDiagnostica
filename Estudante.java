@@ -1,15 +1,19 @@
 package Atividade1;
 
+import java.util.List;
+
 public class Estudante extends Pessoa {
     private String matricula;
     private Curso curso;
+    private List<Notas> notas;
+
 
     public Estudante(String nome, String cpf, String endereco, String telefone, String matricula, Curso curso) {
         super(nome, cpf, endereco, telefone);
         this.matricula = matricula;
         this.curso = curso;
-    }
-
+    }    
+           
     public String getMatricula() {
         return matricula;
     }
@@ -26,8 +30,11 @@ public class Estudante extends Pessoa {
         this.curso = curso;
     }
 
-    @Override
     public void exibirDados() {
-        System.out.println("Estudante " + getNome() + " - Cpf: " + getCpf() + " - End. " + getEndereco() + " - Tel.: " + getTelefone() + ". Matricula: " + matricula);
+        System.out.println(getNome() + " - Cpf: " + getCpf() + " - End. " + getEndereco() + " - Tel.: " + getTelefone() + ". Matricula: " + matricula);
+    }
+    
+    public void adicionarNotas(Notas notas) {
+        this.notas.add(notas);
     }
 }

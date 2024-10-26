@@ -9,6 +9,7 @@ public class Main {
     private static List<Professor> professores = new ArrayList<>();
     private static List<Turma> turmas = new ArrayList<>();
     private static List<Curso> cursos = new ArrayList<>();
+    private static List<Notas> notas = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -19,7 +20,8 @@ public class Main {
             System.out.println("2. Cadastrar Professor");
             System.out.println("3. Cadastrar Estudante");
             System.out.println("4. Cadastrar Turma");
-            System.out.println("5. Exibir Turmas");
+            System.out.println("5. Cadastrar Notas");
+            System.out.println("6. Exibir Turmas");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             
@@ -45,6 +47,9 @@ public class Main {
                     cadastrarTurma();
                     break;
                 case 5:
+                    cadastrarNotas();
+                    break;    
+                case 6:
                     exibirTurmas();
                     break;
                 case 0:
@@ -96,6 +101,12 @@ public class Main {
     }
 
     private static void cadastrarEstudante() {
+        
+        if (cursos.isEmpty()) {
+            System.out.println("Nenhum curso disponível. Cadastre um curso primeiro.");
+            return;
+        }
+        
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
         System.out.print("CPF: ");
@@ -106,11 +117,6 @@ public class Main {
         String telefone = scanner.nextLine();
         System.out.print("Matrícula: ");
         String matricula = scanner.nextLine();
-        
-        if (cursos.isEmpty()) {
-            System.out.println("Nenhum curso disponível. Cadastre um curso primeiro.");
-            return;
-        }
 
         System.out.println("Selecione o curso:");
         for (int j = 0; j < cursos.size(); j++) {
@@ -213,6 +219,39 @@ public class Main {
         System.out.println("Turma cadastrada com sucesso!");
     }
 
+    private static void cadastrarNotas(){
+        while (true) {
+        if (estudantes.isEmpty()) {
+                System.out.println("Nenhum estudante cadastrado.");
+                break;
+            } 
+        
+        System.out.println("Selecione o Estudante ou digite 0 para cancelar):");
+        
+        for (int j = 0; j < estudantes.size(); j++) {
+                System.out.println((j + 1) + ". " + estudantes.get(j).getNome());
+            }
+            int estudanteIndex = scanner.nextInt() - 1;
+            if (estudanteIndex == -1) break;
+            if (estudanteIndex >= 0 && estudanteIndex < estudantes.size()) {
+                //Notas notas = new Notas(0, 0, 0);
+                              
+                System.out.print("Nota 1: ");
+                double Nota1 = scanner.nextDouble();
+                System.out.print("Nota 2: ");
+                double Nota2 = scanner.nextDouble();
+                System.out.print("Nota 3: ");
+                double Nota3 = scanner.nextDouble();
+                
+                notas.add(new Notas(Nota1, Nota2, Nota3));
+                           
+            } else {
+                System.out.println("Estudante inválido.");
+            }
+        }
+        
+    }
+    
     private static void exibirTurmas() {
         if (turmas.isEmpty()) {
             System.out.println("Nenhuma turma cadastrada.");
