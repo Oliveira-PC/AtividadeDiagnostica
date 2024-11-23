@@ -56,7 +56,7 @@ public class Turma {
         System.out.println("Professor: " + professor.getNome());
         System.out.println("Estudantes: ");
         for (Estudante e : estudantes) {
-            e.exibirDados();
+            e.exibirDados();    
         }
         System.out.println();
     }

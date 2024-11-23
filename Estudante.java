@@ -31,7 +31,11 @@ public class Estudante extends Pessoa {
     }
 
     public void exibirDados() {
-        System.out.println(getNome() + " - Cpf: " + getCpf() + " - End. " + getEndereco() + " - Tel.: " + getTelefone() + ". Matricula: " + matricula);
+        
+        for (Notas n : notas) {
+            System.out.println(getNome() + " - Cpf: " + getCpf() + " - End. " + getEndereco() + " - Tel.: " + getTelefone() + ". Matricula: " + matricula);
+            n.exibirDados();
+        }
     }
     
     public void adicionarNotas(Notas notas) {

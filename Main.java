@@ -22,6 +22,7 @@ public class Main {
             System.out.println("4. Cadastrar Turma");
             System.out.println("5. Cadastrar Notas");
             System.out.println("6. Exibir Turmas");
+            System.out.println("7. Exibir Turmas");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             
@@ -242,7 +243,7 @@ public class Main {
                 double Nota2 = scanner.nextDouble();
                 System.out.print("Nota 3: ");
                 double Nota3 = scanner.nextDouble();
-                
+                                                         
                 notas.add(new Notas(Nota1, Nota2, Nota3));
                            
             } else {
@@ -251,7 +252,7 @@ public class Main {
         }
         
     }
-    
+      
     private static void exibirTurmas() {
         if (turmas.isEmpty()) {
             System.out.println("Nenhuma turma cadastrada.");
