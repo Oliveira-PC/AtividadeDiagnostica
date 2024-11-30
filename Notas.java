@@ -12,6 +12,30 @@ public class Notas {
     private int Recuperacao = 0;
     private int Reprovado = 0;
 
+    public int getAprovado() {
+        return Aprovado;
+    }
+
+    public void setAprovado(int Aprovado) {
+        this.Aprovado = Aprovado;
+    }
+
+    public int getRecuperacao() {
+        return Recuperacao;
+    }
+
+    public void setRecuperacao(int Recuperacao) {
+        this.Recuperacao = Recuperacao;
+    }
+
+    public int getReprovado() {
+        return Reprovado;
+    }
+
+    public void setReprovado(int Reprovado) {
+        this.Reprovado = Reprovado;
+    }
+
     public double getNota1() {
         return Nota1;
     }
@@ -43,13 +67,15 @@ public class Notas {
     public void setMedia(double Media) {
         this.Media = Media;
     }
-    
+       
     public void exibirDados() {
         System.out.println("Nota 1: " + getNota1());
         System.out.println("Nota 2: " + getNota2());
         System.out.println("Nota 3: " + getNota3());
-        System.out.println("Media: " + getMedia());
-        Media = (Nota1 + Nota2 + Nota3)/3;
+        
+        Media = getMedia();
+        
+        System.out.println("Media: " + Media);
         
         if(Media>=7){
             System.out.println("Situação: Aprovado");
@@ -58,22 +84,18 @@ public class Notas {
         } else if(Media < 2.5){
             System.out.println("Situação: Reprovado");
         }
+        
     }
     
-    public void exibirStatus() {
+    public void exibirNotas(){
         
-        Media = (Nota1 + Nota2 + Nota3)/3;
+        System.out.println("Aprovados: " + getAprovado());
+        System.out.println("Recuperação: " + getRecuperacao());
+        System.out.println("Reprovados: " + getReprovado());
         
-        if(Media>=7){
-            Aprovado += 1;
-        } else if(Media >= 2.5){
-            Recuperacao += 1;
-        } else if(Media < 2.5){
-            Reprovado += 1;
-        }
     }
-    
-    public Notas(double Nota1, double Nota2, double Nota3) {
+       
+    public Notas(double Nota1, double Nota2, double Nota3, double Media, int Aprovado, int Recuperacao, int Reprovado) {
         
     }
 }

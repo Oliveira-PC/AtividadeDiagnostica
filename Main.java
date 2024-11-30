@@ -10,6 +10,7 @@ public class Main {
     private static List<Turma> turmas = new ArrayList<>();
     private static List<Curso> cursos = new ArrayList<>();
     private static List<Notas> notas = new ArrayList<>();
+    private static Logger logger = new Logger();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -22,7 +23,9 @@ public class Main {
             System.out.println("4. Cadastrar Turma");
             System.out.println("5. Cadastrar Notas");
             System.out.println("6. Exibir Turmas");
-            System.out.println("7. Exibir Turmas");
+            System.out.println("7. Exibir Estudantes");
+            System.out.println("8. Exibir numero de aprovados, recuperação e reprovados");
+            System.out.println("9. Exibir Log");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             
@@ -53,6 +56,15 @@ public class Main {
                 case 6:
                     exibirTurmas();
                     break;
+                case 7:
+                    exibirEstudantes();
+                    break;
+                case 8:
+                    exibirEstudantes();
+                    break;
+                case 9:
+                    exibirLog();
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -77,6 +89,8 @@ public class Main {
         
         cursos.add(new Curso(nomeCurso, semestres));
         System.out.println("Curso cadastrado com sucesso!");
+        
+        logger.addLog("Cadastro de Curso - " + nomeCurso);
     }
 
     private static void cadastrarProfessor() {
@@ -99,6 +113,8 @@ public class Main {
         
         professores.add(new Professor(nome, cpf, endereco, telefone, siape));
         System.out.println("Professor cadastrado com sucesso!");
+        
+        logger.addLog("Cadastro de Professor - " + siape);
     }
 
     private static void cadastrarEstudante() {
@@ -137,6 +153,8 @@ public class Main {
         scanner.nextLine(); // Consumir a quebra de linha
         estudantes.add(new Estudante(nome, cpf, endereco, telefone, matricula, cursos.get(cursoIndex)));
         System.out.println("Estudante cadastrado com sucesso!");
+        
+        logger.addLog("Cadastro de Estudante - " + matricula);
     }
 
     private static void cadastrarTurma() {
@@ -218,6 +236,8 @@ public class Main {
 
         turmas.add(turma);
         System.out.println("Turma cadastrada com sucesso!");
+        
+        logger.addLog("Cadastro de Turma - " + identificacao);
     }
 
     private static void cadastrarNotas(){
@@ -243,9 +263,26 @@ public class Main {
                 double Nota2 = scanner.nextDouble();
                 System.out.print("Nota 3: ");
                 double Nota3 = scanner.nextDouble();
+                
+                double Media = (Nota1 + Nota2 + Nota3)/3;
+                
+                int Aprovado = 0;
+                int Recuperacao = 0;
+                int Reprovado = 0;
+                
+                if(Media >= 7){
+                    Aprovado += 1;
+                } else if(Media >= 2.5){
+                    Recuperacao += 1;
+                } else if(Media < 2.5){
+                    Reprovado += 1;
+                }
                                                          
-                notas.add(new Notas(Nota1, Nota2, Nota3));
-                           
+                notas.add(new Notas(Nota1, Nota2, Nota3, Media, Aprovado, Recuperacao, Reprovado));
+                
+                logger.addLog("Cadastro de Notas do estudante numero " + estudanteIndex);
+                
+
             } else {
                 System.out.println("Estudante inválido.");
             }
@@ -261,5 +298,42 @@ public class Main {
                 turma.exibirTurma();
             }
         }
+        
+        logger.addLog("Exibir Turmas");
+    }
+    
+    private static void exibirEstudantes() {
+    while (true) {
+        if (estudantes.isEmpty()) {
+                System.out.println("Nenhum estudante cadastrado.");
+                break;
+            }
+        for (Turma turma : turmas) {
+                turma.exibirEstudante();
+            }
+        }
+    
+    logger.addLog("Exibir Estudante");
+    
+    }
+    
+    private static void exibirEstatistica(){
+        if (notas.isEmpty()) {
+            System.out.println("Nenhuma Nota cadastrada.");
+        } else {
+            for (Notas n : notas) {
+            System.out.println("Numero de Aprovados, Reprovados e em Recuperação");
+            System.out.println("");
+            n.exibirNotas();
+        }
+        }
+        
+        logger.addLog("Exibir Numero de Aprovados, Reprovados e em Recuperação");
+    }
+    
+    private static void exibirLog(){
+        
+        logger.showLogs();
+        
     }
 }

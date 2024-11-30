@@ -31,13 +31,18 @@ public class Estudante extends Pessoa {
     }
 
     public void exibirDados() {
-        
-        for (Notas n : notas) {
-            System.out.println(getNome() + " - Cpf: " + getCpf() + " - End. " + getEndereco() + " - Tel.: " + getTelefone() + ". Matricula: " + matricula);
-            n.exibirDados();
-        }
+            System.out.println(getNome() + " - Cpf: " + getCpf() + " - End. "
+            + getEndereco() + " - Tel.: " + getTelefone() + ". Matricula: " + matricula);
     }
     
+    public void exibirNotaEst() {
+        for (Notas n : notas) {
+            System.out.println(getNome());
+            n.exibirDados();
+        }
+                
+    }
+      
     public void adicionarNotas(Notas notas) {
         this.notas.add(notas);
     }

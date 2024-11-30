@@ -60,4 +60,13 @@ public class Turma {
         }
         System.out.println();
     }
+    
+    public void exibirEstudante() {
+        
+        System.out.println("Estudantes: ");
+        for (Estudante e : estudantes) {
+            e.exibirNotaEst();
+        }
+        
+    }
 }
