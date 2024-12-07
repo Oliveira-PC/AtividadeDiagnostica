@@ -25,7 +25,8 @@ public class Main {
             System.out.println("6. Exibir Turmas");
             System.out.println("7. Exibir Estudantes");
             System.out.println("8. Exibir numero de aprovados, recuperação e reprovados");
-            System.out.println("9. Exibir Log");
+            System.out.println("9. Vincular Coordenador");
+            System.out.println("10. Exibir Log");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             
@@ -60,9 +61,12 @@ public class Main {
                     exibirEstudantes();
                     break;
                 case 8:
-                    exibirEstudantes();
+                    exibirEstatistica();
                     break;
                 case 9:
+                    vincurlarCoordenador();
+                    break;
+                case 10:
                     exibirLog();
                     break;
                 case 0:
@@ -76,6 +80,8 @@ public class Main {
     }
 
     private static void cadastrarCurso() {
+        int coordenador = 0;
+        
         System.out.print("Nome do curso: ");
         String nomeCurso = scanner.nextLine();
         System.out.print("Quantidade de semestres: ");
@@ -87,7 +93,7 @@ public class Main {
         int semestres = scanner.nextInt();
         scanner.nextLine(); // Consumir a quebra de linha
         
-        cursos.add(new Curso(nomeCurso, semestres));
+        cursos.add(new Curso(nomeCurso, semestres, coordenador));
         System.out.println("Curso cadastrado com sucesso!");
         
         logger.addLog("Cadastro de Curso - " + nomeCurso);
@@ -329,6 +335,49 @@ public class Main {
         }
         
         logger.addLog("Exibir Numero de Aprovados, Reprovados e em Recuperação");
+    }
+    
+    private static void vincurlarCoordenador(){
+        int b = 0;
+        String a = "0";
+        int coordenador = 0;
+        
+        System.out.println("Selecione o curso:");
+        for (int j = 0; j < cursos.size(); j++) {
+            System.out.println((j + 1) + ". " + cursos.get(j).getNome());
+        }
+        int cursoIndex = 0;
+        do {
+            System.out.print("Escolha uma opção de curso: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Por favor, insira um número válido.");
+                scanner.next();
+            }
+            cursoIndex = scanner.nextInt() - 1;
+        } while (cursoIndex < 0 || cursoIndex >= cursos.size());
+
+        scanner.nextLine(); // Consumir a quebra de linha
+        
+        System.out.println("Selecione o professor:");
+        for (int j = 0; j < professores.size(); j++) {
+            System.out.println((j + 1) + ". " + professores.get(j).getNome());
+        }
+        int professorIndex = -1;
+        do {
+            System.out.print("Escolha uma opção de professor: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Por favor, insira um número válido.");
+                scanner.next();
+            }
+            professorIndex = scanner.nextInt() - 1;
+        } while (professorIndex < 0 || professorIndex >= professores.size());
+
+        scanner.nextLine(); // Consumir a quebra de linha
+        
+        Curso curso = new Curso(a, b, coordenador);
+        
+        curso.setCoordenador(professorIndex);
+        
     }
     
     private static void exibirLog(){
