@@ -1,17 +1,24 @@
 package Atividade1;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Notas {
     
     private double Nota1;
     private double Nota2;
     private double Nota3;
+    private double Peso1;
+    private double Peso2;
+    private double Peso3;    
     private double Media;
+    private String Disciplina;
     private int Aprovado = 0;
     private int Recuperacao = 0;
     private int Reprovado = 0;
-
+    
+    private static Logger logger = new Logger();
+    
     public int getAprovado() {
         return Aprovado;
     }
@@ -67,6 +74,14 @@ public class Notas {
     public void setMedia(double Media) {
         this.Media = Media;
     }
+    
+    public String getDisciplina() {
+        return Disciplina;
+    }
+
+    public void setDisciplina(String Disciplina) {
+        this.Disciplina = Disciplina;
+    }
        
     public void exibirDados() {
         System.out.println("Nota 1: " + getNota1());
@@ -84,7 +99,11 @@ public class Notas {
         } else if(Media < 2.5){
             System.out.println("Situação: Reprovado");
         }
-        
+       logger.addLog("Exibindo notas: ");
+       logger.addLog("Nota 1: " + Nota1);
+       logger.addLog("Nota 2: " + Nota2);
+       logger.addLog("Nota 3: " + Nota3);
+       logger.addLog("Media: " + Media);
     }
     
     public void exibirNotas(){
@@ -95,7 +114,7 @@ public class Notas {
         
     }
        
-    public Notas(double Nota1, double Nota2, double Nota3, double Media, int Aprovado, int Recuperacao, int Reprovado) {
+    public Notas(double Nota1, double Nota2, double Nota3, double Media, int Aprovado, int Recuperacao, int Reprovado, String Disciplina) {
         
     }
 }

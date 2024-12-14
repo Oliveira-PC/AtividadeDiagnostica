@@ -1,12 +1,14 @@
 package Atividade1;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Estudante extends Pessoa {
     private String matricula;
     private Curso curso;
     private List<Notas> notas;
-
+    private static Logger logger = new Logger();
 
     public Estudante(String nome, String cpf, String endereco, String telefone, String matricula, Curso curso) {
         super(nome, cpf, endereco, telefone);
@@ -36,11 +38,17 @@ public class Estudante extends Pessoa {
     }
     
     public void exibirNotaEst() {
+   
+        System.out.println("chegou ate class estudante");
         for (Notas n : notas) {
+            System.out.println("comeco for notas");
             System.out.println(getNome());
+            logger.addLog("exibirNotaEst:" + getNome() + " n.exibirDados");
             n.exibirDados();
-        }
-                
+            }
+        System.out.println("Saiu for notas");
+       
+        
     }
       
     public void adicionarNotas(Notas notas) {

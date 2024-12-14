@@ -9,7 +9,8 @@ public class Turma {
     private int semestre;
     private Professor professor;
     private List<Estudante> estudantes;
-
+    private List<String> disciplina;
+    
     public Turma(String identificacao) {
         this.identificacao = identificacao;
         this.estudantes = new ArrayList<>();
@@ -42,9 +43,17 @@ public class Turma {
     public Professor getProfessor() {
         return professor;
     }
-
+    
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+        
+    public List<String> getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(List<String> disciplina) {
+        this.disciplina = disciplina;
     }
 
     public void adicionarEstudante(Estudante estudante) {

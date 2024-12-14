@@ -248,28 +248,30 @@ public class Main {
 
     private static void cadastrarNotas(){
         while (true) {
-        if (estudantes.isEmpty()) {
-                System.out.println("Nenhum estudante cadastrado.");
-                break;
-            } 
-        
+            
         System.out.println("Selecione o Estudante ou digite 0 para cancelar):");
         
         for (int j = 0; j < estudantes.size(); j++) {
                 System.out.println((j + 1) + ". " + estudantes.get(j).getNome());
             }
             int estudanteIndex = scanner.nextInt() - 1;
+            //Estudante e = estudantes.get(estudanteIndex);
+            
             if (estudanteIndex == -1) break;
             if (estudanteIndex >= 0 && estudanteIndex < estudantes.size()) {
-                //Notas notas = new Notas(0, 0, 0);
-                              
+                
+                scanner.nextLine(); //quebra de linha
+                
+                System.out.print("Qual a Disciplina: ");
+                String Disciplina = scanner.nextLine();  
+                
                 System.out.print("Nota 1: ");
                 double Nota1 = scanner.nextDouble();
                 System.out.print("Nota 2: ");
                 double Nota2 = scanner.nextDouble();
                 System.out.print("Nota 3: ");
                 double Nota3 = scanner.nextDouble();
-                
+                //e.getNotas().setNota()
                 double Media = (Nota1 + Nota2 + Nota3)/3;
                 
                 int Aprovado = 0;
@@ -284,9 +286,9 @@ public class Main {
                     Reprovado += 1;
                 }
                                                          
-                notas.add(new Notas(Nota1, Nota2, Nota3, Media, Aprovado, Recuperacao, Reprovado));
+                notas.add(new Notas(Nota1, Nota2, Nota3, Media, Aprovado, Recuperacao, Reprovado, Disciplina));
                 
-                logger.addLog("Cadastro de Notas do estudante numero " + estudanteIndex);
+                logger.addLog("Cadastro de Notas do estudante numero " + estudanteIndex + "na Disciplina" + Disciplina + "Nota 1: " + Nota1 + "Nota 2: " + Nota2 + "Nota 3: " + Nota3);
                 
 
             } else {
@@ -312,11 +314,21 @@ public class Main {
     while (true) {
         if (estudantes.isEmpty()) {
                 System.out.println("Nenhum estudante cadastrado.");
+                logger.addLog("exibirEstudantes: ERRO Sem estudantes cadastrados");
                 break;
             }
-        for (Turma turma : turmas) {
-                turma.exibirEstudante();
+        
+        if (notas.isEmpty()) {
+                System.out.println("Nenhuma Nota cadastrada.");
+                logger.addLog("exibirEstudantes: ERRO Sem notas cadastradas");
+                break;
             }
+        
+        for (Estudante estudante : estudantes) {
+            System.out.println("Teste exibir nota estudante");
+                estudante.exibirNotaEst();
+            }
+        break;
         }
     
     logger.addLog("Exibir Estudante");
